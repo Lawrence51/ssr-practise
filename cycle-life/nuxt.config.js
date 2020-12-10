@@ -12,13 +12,22 @@ export default {
     ]
   },
 
-  // router:{
-  //   middleware:'auth', // 约定在middleware文件夹下
-  // },
+  router:{
+    middleware:'auth', // 约定在middleware文件夹下
+    extendRoutes(routes,resolve){
+      console.log(routes);
+      routes.push({
+        name:'root',
+        path:'/index',
+        component: resolve(__dirname,'pages/index.vue')
+      })
+    }
+  },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    'assets/css/transition.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)

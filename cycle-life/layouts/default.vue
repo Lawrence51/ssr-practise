@@ -1,21 +1,18 @@
 <template>
   <div>
-    <!-- 跳转 声明式跳转 router-link nuxt路由是约定的 -->
-    <nuxt-link to="/">首页</nuxt-link>
-    <nuxt-link to="goods">商品</nuxt-link>
-    <nuxt-link to="/user">用户</nuxt-link>
-    <nuxt-link to="/reg">注册</nuxt-link>
-    <nuxt-link to="/login">登录</nuxt-link>
+    <app-header></app-header>
     <!-- 展示区 -->
     <Nuxt />
   </div>
 </template>
 <script>
+import AppHeader from './app-header'
 export default {
   // middleware
   middleware(context){
     console.log('context is-------middleware', )
-  }
+  },
+  components:{AppHeader}
 }
 </script>
 <style>
