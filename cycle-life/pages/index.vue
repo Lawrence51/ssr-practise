@@ -11,7 +11,6 @@ export default {
     return { a: 1 };
   },
   validate({ params, query }) {
-    console.log(params, "---validate----", query);
     return true;
   },
 

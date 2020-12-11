@@ -9,7 +9,6 @@
 export default {
   props: ["error"],
   created(){
-    console.log(this.error,'----------##')
   }
 };
 </script>

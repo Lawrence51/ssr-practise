@@ -10,7 +10,6 @@ import AppHeader from './app-header'
 export default {
   // middleware
   middleware(context){
-    console.log('context is-------middleware', )
   },
   components:{AppHeader}
 }
