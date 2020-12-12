@@ -1,15 +1,20 @@
 <template>
   <div class="container">
     <h3>首页</h3>
-    <p>{{a}}</p>
+    <p>{{ a }}</p>
     <h4>同域</h4>
     <p>{{ title }}</p>
     <h4>不同域</h4>
-    <p>{{ data }}</p>
+    <p>{{ data2 }}</p>
+    <button @click="getStore">操作</button>
+    <div>index getters:{{getNav}}</div>
+    <div>index state:{{bNav}}</div>
+    <div>user state: {{data}}</div>
   </div>
 </template>
 
 <script>
+import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
 export default {
   middleware: "auth",
   data() {
@@ -20,41 +25,62 @@ export default {
   },
 
   // 读取服务端数据
-  async asyncData({$axios}) {
-    let res = await $axios({url:'/data/list.json'});
-    console.log('---静态---');
-    let res2 = await $axios({url:'/json/data/list.json'}); //其他项目的静态文件
-    let res3 = await $axios({url:'/api/nuxttest'})// 开启了本地的node服务用来做接口查询
-    console.log(res3.data,'res3--', res2.data);
+  async asyncData({ $axios }) {
+    let res = await $axios({ url: "/data/list.json" });
+    console.log("---静态---");
+    let res2 = await $axios({ url: "/json/data/list.json" }); //其他项目的静态文件
+    let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
+    console.log(res3.data, "res3--", res2.data);
     return {
-      title:res.data.title,
-      data:res3.data
-    }
+      title: res.data.title,
+      data2: res3.data.title,
+    };
   },
 
-  async fetch(){
-    let res = await $axios({url:'/data/list.json'});
-    console.log('---静态fetch',);
-    return {
-      title: res.data.title
-    }
+  async fetch({$axios,store,error}) { // 调用时没有加载组件
+    console.log('############fetch res3',res3)
+    let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
+    console.log('############fetch res3',res3)
+    res3.data && store.commit('home/M_UPDATE_HOME',{err:0,data:res3.data})
   },
-
-  // 度无数据， vuex
-  fetch({ store }) {
-    console.log("fetch");
-  },
-  created(){
-    console.log('created server')
+  created() {
+    console.log("created server");
   },
 
   //csr
-  beforeMount(){},
-  mounted(){ console.log('mounted server', window) },
-  beforeMount(){},
-  updated(){ console.log('updated server') },
-  beforeDestroy(){ console.log('updated beforeDestroy') },
-  destroyed(){ console.log('updated destroyed') },
+  // beforeMount(){},
+  // mounted(){ console.log('mounted server', window) },
+  // beforeMount(){},
+  // updated(){ console.log('updated server') },
+  // beforeDestroy(){ console.log('updated beforeDestroy') },
+  // destroyed(){ console.log('updated destroyed') },
+  methods: {
+    getStore() {
+      //发出actions请求给user模块
+      // this.$store.dispatch("user/A_UPDATE_USER", {
+      //   err: 0,
+      //   msg: "登录成功",
+      //   token: "xxx",
+      //   data: { title: "user模块的actions提交过来的数据" },
+      // });
+      this.A_UPDATE_USER({err:0,msg:'登录成功',token:'假token',data:{title:"456"}})
+      //发出mutation请求user模块
+      // this.$store.commit('user/M_UPDATE_USER',{
+      //   err: 0,
+      //   msg: "登录成功",
+      //   token: "xxx",
+      //   data: { title: "user模块的actions提交过来的数据" },
+      // })
+      // this.M_UPDATE_USER({err:0,msg:'登录成功',token:'假token',data:{title:"456"}})
+    },
+    ...mapActions('user',['A_UPDATE_USER']),
+    ...mapMutations('user',['M_UPDATE_USER'])
+  },
+  computed:{
+    ...mapGetters(['getNav']),
+    ...mapState(['bNav']),
+    ...mapState('user',['data'])
+  }
 };
 </script>
 
@@ -62,9 +88,6 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
