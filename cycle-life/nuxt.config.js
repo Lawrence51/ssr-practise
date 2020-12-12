@@ -12,18 +12,21 @@ export default {
     ]
   },
 
-  router:{
-    middleware:'auth', // 约定在middleware文件夹下
-    extendRoutes(routes,resolve){
+  router: {
+    middleware: 'auth', // 约定在middleware文件夹下
+    extendRoutes(routes, resolve) {
       console.log(routes);
       routes.push({
-        name:'root',
-        path:'/index',
-        component: resolve(__dirname,'pages/index.vue')
+        name: 'root',
+        path: '/index',
+        component: resolve(__dirname, 'pages/index.vue')
       })
     }
   },
 
+  // 定义系统默认loading效果，或者指定一loading组件
+  //loading:{ color:'#399',height:'3px' },
+loading: '@/components/loading.vue',
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     'element-ui/lib/theme-chalk/index.css',
@@ -33,7 +36,11 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/router'
+    '@/plugins/router',
+    {
+      src:'@/plugins/axios',
+      ssr:true//服务端
+    }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -44,8 +51,30 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
+  modules: [ // nuxt所需的模块要添加到这里
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    proxy: true, // 开启axios跨域
+  },
+
+  proxy: {
+    '/json': {
+      target: 'http://localhost:61078', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/json': ''
+      },
+    },
+    '/api': {
+      target: 'http://localhost:3001', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      },
+    }
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

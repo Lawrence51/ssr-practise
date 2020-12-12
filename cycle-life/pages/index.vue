@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <h3>首页</h3>
+    <p>{{a}}</p>
+    <h4>同域</h4>
+    <p>{{ title }}</p>
+    <h4>不同域</h4>
+    <p>{{ data }}</p>
   </div>
 </template>
 
@@ -15,11 +20,24 @@ export default {
   },
 
   // 读取服务端数据
-  asyncData(context) {
-    console.log("asyncData");
+  async asyncData({$axios}) {
+    let res = await $axios({url:'/data/list.json'});
+    console.log('---静态---');
+    let res2 = await $axios({url:'/json/data/list.json'}); //其他项目的静态文件
+    let res3 = await $axios({url:'/api/nuxttest'})// 开启了本地的node服务用来做接口查询
+    console.log(res3.data,'res3--', res2.data);
     return {
-      b: 2,
-    };
+      title:res.data.title,
+      data:res3.data
+    }
+  },
+
+  async fetch(){
+    let res = await $axios({url:'/data/list.json'});
+    console.log('---静态fetch',);
+    return {
+      title: res.data.title
+    }
   },
 
   // 度无数据， vuex
