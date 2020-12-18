@@ -52,7 +52,8 @@ loading: '@/components/loading.vue',
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [ // nuxt所需的模块要添加到这里
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
 
   axios: {

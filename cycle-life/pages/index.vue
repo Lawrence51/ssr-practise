@@ -25,12 +25,12 @@ export default {
   },
 
   // 读取服务端数据
-  async asyncData({ $axios }) {
+  async asyncData(parmas) {
+    console.log('----parmas-----',parmas, '----parmas-----@@')
+    const { $axios } = parmas;
     let res = await $axios({ url: "/data/list.json" });
-    console.log("---静态---");
     let res2 = await $axios({ url: "/json/data/list.json" }); //其他项目的静态文件
     let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
-    console.log(res3.data, "res3--", res2.data);
     return {
       title: res.data.title,
       data2: res3.data.title,
@@ -38,13 +38,14 @@ export default {
   },
 
   async fetch({$axios,store,error}) { // 调用时没有加载组件
-    console.log('############fetch res3',res3)
     let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
-    console.log('############fetch res3',res3)
     res3.data && store.commit('home/M_UPDATE_HOME',{err:0,data:res3.data})
   },
   created() {
     console.log("created server");
+  },
+  beforeCreate(){
+    console.log("before create server", this.$axios,'===============');
   },
 
   //csr

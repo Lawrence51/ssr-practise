@@ -16,7 +16,7 @@ export default function ({ $axios, redirect, route, store }) {
     return res;
   })
   //错误处理
-  $axios.onError(err=>{
+  $axios.onError(error=>{
     // 处理
     return error;
   })
