@@ -17,7 +17,7 @@ export default {
   methods: {
     login() {
       this.$axios({
-        url: "/api/login",
+        url: "/api/users/login",
         method: "post",
         data: {
           username: this.username,
