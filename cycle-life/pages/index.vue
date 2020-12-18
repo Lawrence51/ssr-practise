@@ -26,11 +26,10 @@ export default {
 
   // 读取服务端数据
   async asyncData(parmas) {
-    console.log('----parmas-----',parmas, '----parmas-----@@')
     const { $axios } = parmas;
     let res = await $axios({ url: "/data/list.json" });
-    let res2 = await $axios({ url: "/json/data/list.json" }); //其他项目的静态文件
-    let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
+    // let res2 = await $axios({ url: "/json/data/list.json" }); //其他项目的静态文件
+    let res3 = await $axios({ url: "/api/nuxttest?a=2" }); // 开启了本地的node服务用来做接口查询
     return {
       title: res.data.title,
       data2: res3.data.title,
@@ -41,12 +40,12 @@ export default {
     let res3 = await $axios({ url: "/api/nuxttest" }); // 开启了本地的node服务用来做接口查询
     res3.data && store.commit('home/M_UPDATE_HOME',{err:0,data:res3.data})
   },
-  created() {
-    console.log("created server");
-  },
-  beforeCreate(){
-    console.log("before create server", this.$axios,'===============');
-  },
+  // created() {
+  //   console.log("created server");
+  // },
+  // beforeCreate(){
+  //   console.log("before create server", this.$axios,'===============');
+  // },
 
   //csr
   // beforeMount(){},

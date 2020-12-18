@@ -1,5 +1,5 @@
 export default({app,redirect})=>{
-    console.log('插件')
+    // console.log('插件')
     app.router.beforeEach((to,from,next)=>{
         // 全局前置的守卫， 插件
         //next(true) next('/login')
@@ -12,6 +12,6 @@ export default({app,redirect})=>{
         next();
     })
     app.router.afterEach((to,from)=>{
-        console.log('插件全局后置守卫',to)
+        // console.log('插件全局后置守卫',to)
     })
 }

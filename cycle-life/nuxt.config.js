@@ -15,7 +15,6 @@ export default {
   router: {
     middleware: 'auth', // 约定在middleware文件夹下
     extendRoutes(routes, resolve) {
-      console.log(routes);
       routes.push({
         name: 'root',
         path: '/index',
@@ -35,7 +34,11 @@ loading: '@/components/loading.vue',
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/element-ui',
+    {
+      src:'@/plugins/element-ui', // 不支持ssr的插件只会在客户端运行不要给true
+      ssr: true,
+      // mode:'server'
+    },
     '@/plugins/router',
     {
       src:'@/plugins/axios',
@@ -79,6 +82,6 @@ loading: '@/components/loading.vue',
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    transpile: [/^element-ui/],
+    transpile: [/^element-ui/],//打包 element-ui  开头的元素展示出来
   }
 }
