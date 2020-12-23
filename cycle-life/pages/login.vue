@@ -1,8 +1,17 @@
 <template>
-  <div class="goods">
+  <div class="login">
     <h3>登录</h3>
+    <el-divider></el-divider>
+    <el-input v-model="username" placeholder="请输入" class="mb">
+      <template slot="prepend">用户</template>
+    </el-input>
+    <el-input type="password" v-model="password" placeholder="请输入" class="mb">
+      <template slot="prepend">密码</template>
+    </el-input>
+    <div class="error">{{message}}</div>
     <el-button type="primary" @click="login">登录</el-button>
-  </div>
+    <el-button @click="$router.push('/reg')">注册</el-button>
+  </div> 
 </template>
 
 <script>
@@ -32,6 +41,7 @@ export default {
               !this.$route.query.path ||
               /login|reg/.test(this.$route.query.path) // 地址无效或者在登录注册页 跳转到用户页面
             ) {
+              console.log('====================')
               this.$router.replace("/user");
             } else {
               this.$router.replace(this.$route.query.path);
@@ -46,5 +56,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.login{
+  width:35%;
+  height:auto;
+  position: absolute;
+  left:50%;top:50%;
+  margin-left:-17%;
+  transform: translateY(-50%)
+}
+.mb{
+  margin-bottom: 20px;
+}
+.error{
+  color:red
+}
 </style>

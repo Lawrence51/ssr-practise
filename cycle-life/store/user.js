@@ -7,6 +7,7 @@ export const state=()=>({
   
   export const mutations = {
     M_UPDATE_USER(user,payload){
+      console.log('payload======',payload)
       user.err = payload.err;
       user.msg = payload.msg;
       user.data = payload.data;

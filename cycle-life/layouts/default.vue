@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-header></app-header>
+    <app-header v-if="bNav"></app-header>
     <!-- 展示区 -->
     <Nuxt />
   </div>
@@ -8,6 +8,23 @@
 <script>
 import AppHeader from './app-header'
 export default {
+  data(){
+    return {
+      bNav:true
+    }
+  },
+  watch:{
+    $route:{
+      immediate:true,
+      handler(route){
+        if(/login|reg/.test(route.path)){
+          this.bNav=false;
+        }else{
+          this.bNav=true;
+        }
+      }
+    }
+  },
   // middleware
   middleware(context){
   },

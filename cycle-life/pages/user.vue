@@ -13,7 +13,6 @@ export default {
     // redirect 强制跳转
     // params, query 路由信息校验参数合理性
     console.log("middleware nuxt.config outside------");
-    redirect('/login')
   },
 };
 </script>

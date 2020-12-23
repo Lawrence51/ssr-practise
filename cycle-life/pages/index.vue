@@ -6,7 +6,7 @@
     <p>{{ title }}</p>
     <h4>不同域</h4>
     <p>{{ data2 }}</p>
-    <button @click="getStore">操作</button>
+    <el-button @click="getStore">操作</el-button>
     <div>index getters:{{getNav}}</div>
     <div>index state:{{bNav}}</div>
     <div>user state: {{data}}</div>
