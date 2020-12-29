@@ -41,7 +41,6 @@ export default {
               !this.$route.query.path ||
               /login|reg/.test(this.$route.query.path) // 地址无效或者在登录注册页 跳转到用户页面
             ) {
-              console.log('====================')
               this.$router.replace("/user");
             } else {
               this.$router.replace(this.$route.query.path);
@@ -53,6 +52,9 @@ export default {
         .catch((err) => {});
     },
   },
+  mounted(){
+    this.$show();
+  }
 };
 </script>
 

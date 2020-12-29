@@ -10,7 +10,6 @@ export default({app,redirect})=>{
         // }
         next();
     })
-    console.log('插件***********************88',app)
     app.router.afterEach((to,from)=>{
         // console.log('插件全局后置守卫',to)
     })

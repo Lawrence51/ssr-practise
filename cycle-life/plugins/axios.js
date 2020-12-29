@@ -4,7 +4,6 @@ export default function ({ $axios, redirect, route, store, app:{$cookies} }) {
 
   //请求拦截
   $axios.onRequest(config => {
-    console.log('store.state--------',store.state)
     config.headers.token = store.state.user.token; // 配置token
     return config;
   })

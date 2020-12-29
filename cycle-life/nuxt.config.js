@@ -43,7 +43,8 @@ loading: '@/components/loading.vue',
     {
       src:'@/plugins/axios',
       ssr:true//服务端
-    }
+    },
+    '~/plugins/mixins'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
