@@ -2,6 +2,7 @@
   <div class="login">
     <h3>登录</h3>
     <el-divider></el-divider>
+    <input v-foucs1="fff" class="direct-class" />
     <el-input v-model="username" placeholder="请输入" class="mb">
       <template slot="prepend">用户</template>
     </el-input>
@@ -21,6 +22,7 @@ export default {
       message: "",
       username: "viccccc",
       password: "333333",
+      fff:'~~~~'
     };
   },
   methods: {
@@ -72,5 +74,8 @@ export default {
 }
 .error{
   color:red
+}
+.direct-class{
+  /* padding-left: 12px; */
 }
 </style>

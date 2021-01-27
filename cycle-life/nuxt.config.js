@@ -5,7 +5,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_name || 'cycle-life' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_name || 'cycle-life' }, //每个页面一个，不至于被覆盖 hid为同一标识
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

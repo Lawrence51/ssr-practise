@@ -13,6 +13,17 @@
 </template>
 <script>
 export default {
+  name:'goods',
+  head(){
+    return {
+      meta:[
+        {name:'keywords',content:this.collectionName}
+      ]
+    }
+  },
+  data:()=>({
+    collectionName: '商品'
+  })
 }
 </script>
 

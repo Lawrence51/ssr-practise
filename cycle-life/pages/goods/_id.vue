@@ -1,9 +1,10 @@
 <template>
   <div class="details">
     <h3>详情页</h3>
-    <div v-for="item in data" :key="item.name">
+    <div v-for="item in dataList" :key="item.name">
       <div>发布时间:{{item.time | date}}</div>
       <div>发布时间:{{4 | fillzero}}</div>
+      <div>发布名称:{{item.name}}</div>
     </div>
   </div>
 </template>
@@ -13,7 +14,10 @@ export default {
   validate({params,query}){
     return typeof params.id === 'number'
   },
-  transition:'test',  
+  transition:'test',
+  head(){
+    return this.$seo('详情1',this.dataList[0].name,[{}])
+  },
   asyncData({query,params,$axios}){
     return $axios({
       url:'/api/goods/goods-list',
@@ -21,7 +25,8 @@ export default {
     }).then(res=>{
       console.log('res=====', res)
       let list = res.data;
-      return {data: list};
+
+      return {dataList: list};
     })
   }
 }
